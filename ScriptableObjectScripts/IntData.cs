@@ -12,6 +12,11 @@ public class IntData : ScriptableObject
     {
         value += number;
     }
+    
+    public void UpdateValueBy1()
+    {
+        value ++;
+    }
 
     public void ReplaceValue(int number)
     {
