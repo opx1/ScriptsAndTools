@@ -8,11 +8,16 @@ public class MatchBehavior : MonoBehaviour
     public ID idObj;
     public IntData intObj;
     public IntData intObj2;
-    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent;
+    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent;
     private bool isInside = false;
+    private bool hasHandledTrigger = false;
+    private int update = 0;
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
+        if (hasHandledTrigger) yield break; // Check if trigger has been handled already
+        hasHandledTrigger = true; // Set trigger handling to true
+
         isInside = true;
         
         Debug.Log("Trigger");
@@ -32,8 +37,6 @@ public class MatchBehavior : MonoBehaviour
             noMatchDelayedEvent.Invoke();
         }
 
-        
-
         while (intObj2.value != intObj.value && intObj2.value < intObj.value && isInside == true)
         {
             yield return new WaitForSeconds(5.0f);
@@ -50,5 +53,6 @@ public class MatchBehavior : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isInside = false;
+        hasHandledTrigger = false; // Reset trigger handling when exiting trigger
     }
 }
