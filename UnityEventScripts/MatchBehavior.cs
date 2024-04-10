@@ -8,10 +8,10 @@ public class MatchBehavior : MonoBehaviour
     public ID idObj;
     public IntData intObj;
     public IntData intObj2;
-    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent;
+    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent, updateEventOne, updateEventTwo, updateEventThree;
     private bool isInside = false;
     private bool hasHandledTrigger = false;
-    private int update = 0;
+    public IntData update;
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
@@ -39,14 +39,32 @@ public class MatchBehavior : MonoBehaviour
 
         while (intObj2.value != intObj.value && intObj2.value < intObj.value && isInside == true)
         {
-            yield return new WaitForSeconds(5.0f);
+            if (update.value == 0 && isInside)
+            {
+                updateEvent.Invoke();
+            }
+            
+            else if (update.value == 1 && isInside)
+            {
+                updateEventOne.Invoke();
+            }
+
+            else if (update.value == 2 && isInside)
+            {
+                updateEventTwo.Invoke();
+            }
+
+            else if (update.value == 3 && isInside)
+            {
+                updateEventThree.Invoke();
+            }
+            yield return new WaitForSeconds(3.0f);
             Debug.Log("Delay");
+            update.value++;
             noMatchDelayedEvent.Invoke();
             Debug.Log("No Match");
+           
         }
-
-        matchEvent.Invoke();
-        Debug.Log("Match");
     }
 
 
