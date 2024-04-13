@@ -10,6 +10,7 @@ public class TransformValueData : MonoBehaviour
     public UnityEvent compareValue, noCompareValue;
     public ValueType valueType;
     public FloatData compareObj;
+    public FloatData maxCompareObj;
 
     public enum ValueType
     {
@@ -33,7 +34,7 @@ public class TransformValueData : MonoBehaviour
     {
         float valueToCompare = GetValueToCompare();
         
-        if (valueToCompare >= compareObj.value)
+        if (valueToCompare >= compareObj.value && valueToCompare <= maxCompareObj.value)
         {
             compareValue.Invoke();
         }
