@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
@@ -7,7 +8,6 @@ public class InstancingBehaviour : MonoBehaviour
     [FormerlySerializedAs("Indexer")] public IntData indexer;
     [FormerlySerializedAs("StartEvent")] public UnityEvent startEvent;
     [FormerlySerializedAs("SpawnPoint")] public Transform spawnPoint;
-    [FormerlySerializedAs("TargetPoint")] public Transform targetPoint;
     [FormerlySerializedAs("PrefabObj")] public Transform prefabObj;
 
     private void Start()
@@ -23,14 +23,12 @@ public class InstancingBehaviour : MonoBehaviour
     public void InstantiateAtPosition(GameObject prefab)
     {
         var newInstance = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-        newInstance.transform.LookAt(targetPoint.position);
     }
 
     public void InstantiateUsingPrefab()
     {
         if (prefabObj == null) return;
         var newInstance = Instantiate(prefabObj, spawnPoint.position, Quaternion.identity);
-        newInstance.transform.LookAt(targetPoint.position);
     }
 
     public void InstantiateMultiple(GameObject prefab)

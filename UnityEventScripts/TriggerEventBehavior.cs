@@ -9,6 +9,8 @@ public class TriggerEventBehavior : MonoBehaviour
     public UnityEvent triggerEnterEvent, triggerExitEvent;
     private bool isInside = false;
     private bool hasHandledTrigger = false;
+    public bool isSpawned = false;
+
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
@@ -22,12 +24,18 @@ public class TriggerEventBehavior : MonoBehaviour
     private IEnumerator OnTriggerExit(Collider other)
     {
         isInside = false;
+        isSpawned = false;
         hasHandledTrigger = false; // Reset trigger handling when exiting trigger
-        if (isInside == false)
+        yield return new WaitForSeconds(1);
+        if (isInside == false && isSpawned == false)
         {
             triggerExitEvent.Invoke();
-            yield break;
+            isInside = true;
         }
-        
+
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        isSpawned = true;
     }
 }
