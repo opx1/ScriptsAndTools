@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class MatchBehavior : MonoBehaviour
 {
     public ID idObj;
-    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent, updateEventOne, updateEventTwo, updateEventThree, exitTriggerEvent;
+    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, exitTriggerEvent;
     private bool isInside = false;
     private bool hasHandledTrigger = false;
     

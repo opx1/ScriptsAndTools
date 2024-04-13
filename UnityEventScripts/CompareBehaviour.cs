@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class CompareBehaviour : MonoBehaviour
 {
+   public ID idObj;
    public IntData intObj;
    public IntData intObj2;
    public IntData update;
@@ -20,39 +21,56 @@ public class CompareBehaviour : MonoBehaviour
 
       isInside = true;
       
-      while (intObj2.value != intObj.value && intObj2.value < intObj.value && isInside == true)
+      Debug.Log("Trigger");
+      var tempObj = other.GetComponent<IDContainerBehavior>();
+      if (tempObj == null)
+         yield break;
+
+      var idOther = tempObj.idObj;
+      if (idOther == idObj)
       {
-         if (update.value == 0 && isInside)
-         {
-            updateEvent.Invoke();
-         }
-            
-         else if (update.value == 1 && isInside)
-         {
-            updateEventOne.Invoke();
-         }
-
-         else if (update.value == 2 && isInside)
-         {
-            updateEventTwo.Invoke();
-         }
-
-         else if (update.value == 3 && isInside)
-         {
-            updateEventThree.Invoke();
-         }
-         yield return new WaitForSeconds(3.0f);
-         Debug.Log("Delay");
-         update.value++;
-         noMatchDelayedEvent.Invoke();
-         Debug.Log("No Match");
-           
+         CompareValue();
       }
    }
-   private void OnTriggerExit(Collider other)
+
+private IEnumerator CompareValue()
+{
+   while (intObj2.value != intObj.value && intObj2.value < intObj.value && isInside == true)
+   {
+      if (update.value == 0 && isInside)
+      {
+         updateEvent.Invoke();
+      }
+
+      else if (update.value == 1 && isInside)
+      {
+         updateEventOne.Invoke();
+      }
+
+      else if (update.value == 2 && isInside)
+      {
+         updateEventTwo.Invoke();
+      }
+
+      else if (update.value == 3 && isInside)
+      {
+         updateEventThree.Invoke();
+      }
+
+      yield return new WaitForSeconds(3.0f);
+      Debug.Log("Delay");
+      update.value++;
+      noMatchDelayedEvent.Invoke();
+      Debug.Log("No Match");
+   }
+}
+
+private void OnTriggerExit(Collider other)
    {
       isInside = false;
       hasHandledTrigger = false; // Reset trigger handling when exiting trigger
       exitTriggerEvent.Invoke();
    }
+
+  
 }
