@@ -6,9 +6,10 @@ using UnityEngine.Events;
 public class MatchBehavior : MonoBehaviour
 {
     public ID idObj;
-    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, exitTriggerEvent;
+    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, matchTriggerEvent;
     private bool isInside = false;
     private bool hasHandledTrigger = false;
+    public bool isTriggered = false;
     
 
     private IEnumerator OnTriggerEnter(Collider other)
@@ -34,6 +35,13 @@ public class MatchBehavior : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             noMatchDelayedEvent.Invoke();
         }
+        if (idOther == idObj && isInside == true)
+        {
+            if (isTriggered == true)
+            {
+                matchTriggerEvent.Invoke();
+            }
+        }
     }
 
 
@@ -41,6 +49,15 @@ public class MatchBehavior : MonoBehaviour
     {
         isInside = false;
         hasHandledTrigger = false; // Reset trigger handling when exiting trigger
-        exitTriggerEvent.Invoke();
+    }
+
+    public void setTriggerTrue()
+    {
+        isTriggered = true;
+    }
+    
+    public void setTriggerFalse()
+    {
+        isTriggered = false;
     }
 }
