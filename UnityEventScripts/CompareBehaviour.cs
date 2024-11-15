@@ -11,6 +11,7 @@ public class CompareBehaviour : MonoBehaviour
    public IntData intObj2;
    public IntData update;
    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent, updateEventOne, updateEventTwo, updateEventThree, exitTriggerEvent;
+
    private bool hasHandledTrigger = false;
    
    private IEnumerator OnTriggerEnter(Collider other)
@@ -26,9 +27,11 @@ public class CompareBehaviour : MonoBehaviour
 
       var idOther = tempObj.idObj;
       if (idOther != idObj) yield break;
+
       while (intObj2.value <= intObj.value && transformValueData.isWatering == true)
       {
          if (update.value == 0 && transformValueData.isWatering)
+
          {
             updateEvent.Invoke();
          }
@@ -43,6 +46,7 @@ public class CompareBehaviour : MonoBehaviour
             updateEventTwo.Invoke();
          }
 
+
          if (update.value == 3 && transformValueData.isWatering)
          {
             updateEventThree.Invoke();
@@ -54,8 +58,8 @@ public class CompareBehaviour : MonoBehaviour
          noMatchDelayedEvent.Invoke();
          Debug.Log("No Match");
       }
-
-      hasHandledTrigger = false; // Reset trigger handling when exiting trigger
+     
+     hasHandledTrigger = false; // Reset trigger handling when exiting trigger
       exitTriggerEvent.Invoke();
    }
    /*private void OnTriggerExit(Collider other)

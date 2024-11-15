@@ -34,7 +34,8 @@ public class TransformValueData : MonoBehaviour
     {
         float valueToCompare = GetValueToCompare();
         
-        if (valueToCompare >= compareObj.value)
+        
+        if (valueToCompare >= compareObj.value && valueToCompare <= maxCompareObj.value)
         {
             compareValue.Invoke();
             isWatering = true;
