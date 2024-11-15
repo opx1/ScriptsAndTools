@@ -10,7 +10,7 @@ public class TransformValueData : MonoBehaviour
     public UnityEvent compareValue, noCompareValue;
     public ValueType valueType;
     public FloatData compareObj;
-    public FloatData maxCompareObj;
+    public bool isWatering;
 
     public enum ValueType
     {
@@ -38,10 +38,12 @@ public class TransformValueData : MonoBehaviour
         if (valueToCompare >= compareObj.value && valueToCompare <= maxCompareObj.value)
         {
             compareValue.Invoke();
+            isWatering = true;
         }
         else
         {
             noCompareValue.Invoke();
+            isWatering = false;
         }
     }
 
