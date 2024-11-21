@@ -1,11 +1,11 @@
 using System.Collections;
-using System. Collections. Generic;
+using System.Collections. Generic;
 using UnityEngine;
 
 public class MaterialIDBehaviour : IDContainerBehaviour //look at this later
 {
-    public MaterialIDDatalist materialIDDataListObj;
-    private Renderer rendererobj;
+    public MaterialIDDataList materialIDDataListObj;
+    private Renderer rendererObj;
     private void Awake()
     {
         rendererObj = GetComponent<Renderer>();
@@ -17,18 +17,18 @@ public class MaterialIDBehaviour : IDContainerBehaviour //look at this later
         rendererObj.material = newMaterialID.newMaterialOrder;
     }
 
-    public void ChangeRendererMaterialOrder(MaterialIDDatalist obj)
+    public void ChangeRendererMaterialOrder()
     {
-        rendererObj.material = obj.currentMaterial.newMaterialOrder;
+        rendererObj.material = materialIDDataListObj.currentMaterial.newMaterialOrder;
     }
 
     public void ChangeRendererMaterialTicket(MaterialID newMaterialID)
     {
-        rendererObj. material = newMaterialID.newMaterialTicket;
+        rendererObj.material = newMaterialID.newMaterialTicket;
     }
 
-    public void ChangeRendererMaterialTicket (MaterialIDDatalist obj)
+    public void ChangeRendererMaterialTicket ()
     {
-        rendererobj.material = obj.currentMaterial.newMaterialTicket;
+        rendererObj.material = materialIDDataListObj.currentMaterial.newMaterialTicket;
     }
 }

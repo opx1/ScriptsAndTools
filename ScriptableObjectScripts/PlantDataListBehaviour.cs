@@ -16,7 +16,7 @@ public class PlantDataListBehaviour : MonoBehaviour
 
     public void OnTriggerEnter (Collider Other)
     {
-        Debug.Log("Collision Detected");
-        seedSelect. Invoke();
+        Debug.Log("Seed Chosen");
+        seedSelect.Invoke();
     }
 }
