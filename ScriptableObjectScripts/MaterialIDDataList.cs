@@ -38,20 +38,19 @@ public class MaterialIDDataList : ScriptableObject
 
     public void SetCurrentMaterial()
     {
-        if(num > MaterialIDList.Count - 1)
+        if(element.value > MaterialIDList.Count - 1)
         {
-            num = MaterialIDList.Count - 1;
-            Debug.Log("No material to set to. Corrected to element " + num);
+            element.value= MaterialIDList.Count -1;
+            Debug.Log("No material to set to. Corrected to element " + element.value);
         }
-        else if(num < 0)
+        else if(element.value < 0)
         {
-            num = 0;
-            Debug.Log("No material to set to. Corrected to element " + num);
+            element.value = 0;
+            Debug.Log("No material to set to. Corrected to element " + element.value);
         }
         else
         {
-            num = (int)element.value;
-            currentMaterial = MaterialIDList[num];
+            currentMaterial = MaterialIDList[element.value];
         }
     }
 
