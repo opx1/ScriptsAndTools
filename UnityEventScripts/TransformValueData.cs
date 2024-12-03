@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +6,7 @@ public class TransformValueData : MonoBehaviour
     public GameObject objTransform;
     public UnityEvent compareValue, noCompareValue;
     public ValueType valueType;
-    public FloatData compareObj;
+    public FloatData compareObj, maxCompareObj;
     public bool isWatering;
 
     public enum ValueType
