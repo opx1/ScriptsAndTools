@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class PlantBehaviour : MonoBehaviour
 {
-    public ID hand;
+    public IDDataList seed;
     public ID dirt1;
-    public ID dirt2;
-    public ID dirt3;
-    public ID dirt4;
-    public ID dirt5;
-    public ID dirt6;
-    public ID dirt7;
+    public ID HighDrain;
+    public ID HighSoil;
+    public ID LowDrain;
+    public ID LowSoil;
+    public ID MidDrain;
+    public ID MidSoil;
     public ID light1;
     public ID light2;
     public ID light3;
@@ -58,7 +58,7 @@ public class PlantBehaviour : MonoBehaviour
     {
         var tempObj = other.GetComponent<IDContainerBehavior>();
         var idOther = tempObj.idObj;
-        if(idOther == hand && potFull)
+        if(seed.IDList.Contains(idOther) && potFull)
         {
             Debug.Log("Seed Planted");
             water = mainList.water;
@@ -72,49 +72,49 @@ public class PlantBehaviour : MonoBehaviour
         if(idOther == dirt1)
         {
             Debug.Log("dirt1");
-            dirtType = 1;
-            CheckDirt();
-            dirtAmt++;
-        }
-        if(idOther == dirt2)
-        {
-            Debug.Log("dirt2");
-            dirtType = 2;
-            CheckDirt();
-            dirtAmt++;
-        }
-        if(idOther == dirt3)
-        {
-            Debug.Log("dirt3");
-            dirtType = 3;
-            CheckDirt();
-            dirtAmt++;
-        }
-        if(idOther == dirt4)
-        {
-            Debug.Log("dirt4");
             dirtType = 4;
             CheckDirt();
             dirtAmt++;
         }
-        if(idOther == dirt5)
+        if(idOther == HighDrain)
         {
-            Debug.Log("dirt5");
+            Debug.Log("HighDrain");
+            dirtType = 3;
+            CheckDirt();
+            dirtAmt++;
+        }
+        if(idOther == HighSoil)
+        {
+            Debug.Log("HighSoil");
+            dirtType = 7;
+            CheckDirt();
+            dirtAmt++;
+        }
+        if(idOther == LowDrain)
+        {
+            Debug.Log("LowDrain");
+            dirtType = 1;
+            CheckDirt();
+            dirtAmt++;
+        }
+        if(idOther == LowSoil)
+        {
+            Debug.Log("LowSoil");
             dirtType = 5;
             CheckDirt();
             dirtAmt++;
         }
-        if(idOther == dirt6)
+        if(idOther == MidDrain)
         {
-            Debug.Log("dirt6");
-            dirtType = 6;
+            Debug.Log("MidDrain");
+            dirtType = 2;
             CheckDirt();
             dirtAmt++;
         }
-        if(idOther == dirt7)
+        if(idOther == MidSoil)
         {
-            Debug.Log("dirt7");
-            dirtType = 7;
+            Debug.Log("MidSoil");
+            dirtType = 6;
             CheckDirt();
             dirtAmt++;
         }

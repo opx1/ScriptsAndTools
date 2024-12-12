@@ -13,4 +13,14 @@ public class IDContainerBehavior : MonoBehaviour
     {
         startEvent.Invoke();
     }
+    
+    public void ChangeIDObj(ID newID)
+    {
+        idObj = newID;
+    }
+    
+    public void ClearIDObj()
+    {
+        idObj = null;
+    }
 }

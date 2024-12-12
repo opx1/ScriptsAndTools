@@ -9,17 +9,20 @@ public class CompareBehaviour : MonoBehaviour
    public ID idObj;
    public IntData intObj;
    public IntData intObj2;
-   public IntData update;
+   public int update;
    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent, updateEvent, updateEventOne, updateEventTwo, updateEventThree, exitTriggerEvent;
-
+   private PlantBehaviour plantbehavior;
+   
    private bool hasHandledTrigger = false;
    
    private IEnumerator OnTriggerEnter(Collider other)
    {
+      plantbehavior = GetComponent<PlantBehaviour>();
       var transformValueData = other.GetComponent<TransformValueData>();
       if (hasHandledTrigger) yield break; // Check if trigger has been handled already
       hasHandledTrigger = true; // Set trigger handling to true
       Debug.Log("Trigger");
+      update = 0;
       
       var tempObj = other.GetComponent<IDContainerBehavior>();
       if (tempObj == null)
@@ -30,34 +33,44 @@ public class CompareBehaviour : MonoBehaviour
 
       while (intObj2.value <= intObj.value && transformValueData.isWatering == true)
       {
-         if (update.value == 0 && transformValueData.isWatering)
+         if (update == 0 && transformValueData.isWatering)
 
          {
             updateEvent.Invoke();
+            plantbehavior.waterAdd += 1;
+            plantbehavior.watered = true;
          }
 
-         if (update.value == 1 && transformValueData.isWatering)
+         if (update== 1 && transformValueData.isWatering)
          {
             updateEventOne.Invoke();
+            plantbehavior.waterAdd += 1;
+            plantbehavior.watered = true;
          }
 
-         if (update.value == 2 && transformValueData.isWatering)
+         if (update == 2 && transformValueData.isWatering)
          {
             updateEventTwo.Invoke();
+            plantbehavior.waterAdd += 1;
+            plantbehavior.watered = true;
          }
 
 
-         if (update.value == 3 && transformValueData.isWatering)
+         if (update == 3 && transformValueData.isWatering)
          {
-            updateEventThree.Invoke();
+            updateEventThree.Invoke();      
+            plantbehavior.waterAdd += 1;
+            plantbehavior.watered = true;
          }
 
          yield return new WaitForSeconds(2.0f);
          Debug.Log("Delay");
-         update.value++;
+         update++;
          noMatchDelayedEvent.Invoke();
          Debug.Log("No Match");
       }
+      
+      plantbehavior.UpdateWater();
      
      hasHandledTrigger = false; // Reset trigger handling when exiting trigger
       exitTriggerEvent.Invoke();

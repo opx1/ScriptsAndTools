@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class ButtonBehaviour : MonoBehaviour
 {
     public UnityEvent buttonPressed;
     public bool pressed = false;
-    private void OnTriggerEnter()
+    public void PressButton()
     {
         pressed = true;
         buttonPressed. Invoke();
